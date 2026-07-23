@@ -1,0 +1,9 @@
+# Put your relay behind TLS in one stanza. Point your domain's DNS at this
+# box, replace the hostname, and Caddy fetches certificates automatically.
+relay.yourdomain.com {
+    reverse_proxy localhost:8080
+    # No access logs — a relay that keeps no logs has nothing to hand over.
+    log {
+        output discard
+    }
+}

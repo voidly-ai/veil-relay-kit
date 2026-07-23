@@ -1,0 +1,26 @@
+{
+  "name": "veil-relay-kit",
+  "version": "1.0.0",
+  "description": "Run your own relay for Veil — E2E encrypted messaging that no single operator can deanonymize.",
+  "license": "AGPL-3.0-only",
+  "homepage": "https://voidly.ai/veil",
+  "repository": { "type": "git", "url": "https://github.com/voidly-ai/veil-relay-kit" },
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
