@@ -1,37 +1,11 @@
-# Veil Relay Kit
+# Veil Relay Kit — historical prototype
 
-Run your own relay for [Veil](https://voidly.ai/veil) — the one move most
-messengers won't let you make. With your own relay, rejoining your IP to
-your mailbox takes two operators colluding, not one.
+**Status: historical relay example. Compatibility with the current Veil client has not been established. Do not deploy this kit as a privacy or availability guarantee for current Veil conversations.**
 
-**~5 minutes · runs on a $5 VPS · no logs by design**
+This repository contains a Node.js relay with SQLite message storage, WebSocket and SSE delivery, and optional federation code. It is useful for studying the earlier relay interface. Its API and privacy behavior should be reviewed against the [current Veil privacy model](https://voidly.ai/veil) before any new deployment.
 
-## Quick start
+The relay stores ciphertext, but its operator can observe connecting IP addresses, timing, message sizes, and routing identifiers used by this implementation. Running a single relay does not make a user anonymous, and this source alone does not establish support for current Veil features such as drop-box routing or modern client compatibility. Federation needs a separately configured peer secret and an accepted peer relationship; setting environment variables does not grant access to the primary network.
 
-```bash
-git clone https://github.com/voidly-ai/veil-relay-kit && cd veil-relay-kit
-cp .env.example .env          # defaults are fine for standalone use
-docker compose up -d --build
-```
+For the current messaging app and its disclosed limits, use [Veil](https://voidly.ai/veil). If this kit is revived, publish a tested compatibility matrix and updated deployment and privacy documentation first.
 
-Put it behind TLS (Veil requires https) — `Caddyfile.example` does it in
-one stanza. Then in Veil: **Settings → Privacy → Custom relay** → paste
-`https://relay.yourdomain.com`.
-
-## What this relay can and can't see
-
-Honesty first: your relay sees the mailboxes you poll and your IP. It
-**cannot** read messages (end-to-end encrypted before they arrive), and it
-holds no plaintext, ever. The full disclosure lives in the
-[protocol spec](https://voidly.ai/agent-relay-protocol.md).
-
-## Standalone vs federated
-
-By default the kit runs **standalone** — your traffic, your box, no third
-party. Set `RELAY_PEER_SECRET` + `RELAY_URL` to federate with the primary
-network (optional; peer registration at `/v1/relay/peers`).
-
-## License
-
-AGPL-3.0 — run it anywhere, fork it freely; if you ship a modified relay
-as a service, share your changes back.
+License: AGPL-3.0-only. See [LICENSE](LICENSE).
